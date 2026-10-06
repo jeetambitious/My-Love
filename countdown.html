@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Countdown ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+
+    background:
+        radial-gradient(circle at top, #ff8fab, transparent 35%),
+        linear-gradient(135deg, #12001f, #2b003d, #52002f);
+
+    color: white;
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    color: #fff;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Main card */
+.container {
+    width: 90%;
+    max-width: 700px;
+    padding: 45px 25px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 0 40px rgba(255, 105, 180, 0.35),
+        inset 0 0 20px rgba(255,255,255,0.05);
+
+    position: relative;
+    z-index: 5;
+}
+
+.small {
+    font-size: 18px;
+    color: #ffd6e7;
+    letter-spacing: 2px;
+}
+
+h1 {
+    margin: 15px 0;
+
+    font-size: clamp(40px, 8vw, 70px);
+
+    background: linear-gradient(
+        90deg,
+        #fff,
+        #ff9ecb,
+        #fff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 30px rgba(255, 100, 180, 0.5);
+}
+
+.name {
+    font-size: clamp(25px, 5vw, 40px);
+    color: #ffb6d9;
+    margin-bottom: 35px;
+}
+
+/* Countdown */
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.box {
+    padding: 20px 10px;
+
+    background: rgba(255,255,255,0.12);
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.15);
+}
+
+.number {
+    font-size: clamp(28px, 6vw, 45px);
+    font-weight: bold;
+    color: #fff;
+}
+
+.label {
+    margin-top: 5px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #ffc7df;
+}
+
+.message {
+    margin-top: 35px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #ffe8f1;
+}
+
+.heart {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Button */
+.back-btn {
+    display: inline-block;
+
+    margin-top: 30px;
+    padding: 13px 28px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #ff4f9a,
+        #ff176f
+    );
+
+    border-radius: 30px;
+
+    box-shadow: 0 0 20px rgba(255, 50, 140, 0.5);
+
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px rgba(255, 50, 140, 0.8);
+}
+
+/* Floating hearts */
+.floating {
+    position: absolute;
+    bottom: -50px;
+    font-size: 25px;
+    animation: floatUp linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Mobile */
+@media(max-width: 600px) {
+
+    .container {
+        padding: 35px 15px;
+    }
+
+    .countdown {
+        gap: 7px;
+    }
+
+    .box {
+        padding: 15px 5px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="heart">❤️</div>
+
+    <div class="small">
+        Someone Very Special's Birthday
+    </div>
+
+    <h1>Birthday Countdown</h1>
+
+    <div class="name">
+        Puchkuuu 💕
+    </div>
+
+    <div class="countdown">
+
+        <div class="box">
+            <div class="number" id="days">00</div>
+            <div class="label">DAYS</div>
+        </div>
+
+        <div class="box">
+            <div class="number" id="hours">00</div>
+            <div class="label">HOURS</div>
+        </div>
+
+        <div class="box">
+            <div class="number" id="minutes">00</div>
+            <div class="label">MINUTES</div>
+        </div>
+
+        <div class="box">
+            <div class="number" id="seconds">00</div>
+            <div class="label">SECONDS</div>
+        </div>
+
+    </div>
+
+    <div class="message">
+        Every second is bringing us closer to your special day... 🥺❤️
+        <br>
+        I can't wait to celebrate the most beautiful person in my life.
+        💕
+    </div>
+
+    <a href="index.html" class="back-btn">
+        💌 Back to My Surprise
+    </a>
+
+</div>
+
+<script>
+
+/* ===============================
+   BIRTHDAY DATE
+   7 OCTOBER 2026
+================================ */
+
+const birthday = new Date("2026-10-07T00:00:00").getTime();
+
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const difference = birthday - now;
+
+
+    if (difference <= 0) {
+
+        document.getElementById("days").innerHTML = "00";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
+
+        document.querySelector("h1").innerHTML =
+            "Happy Birthday! 🎂";
+
+        document.querySelector(".message").innerHTML =
+            "Today is your special day, Puchkuuu! ❤️<br>" +
+            "I Love You So Much! 🫂💕";
+
+        return;
+    }
+
+
+    const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+    );
+
+    const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+    );
+
+    const seconds = Math.floor(
+        (difference / 1000) % 60
+    );
+
+
+    document.getElementById("days").innerHTML =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").innerHTML =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").innerHTML =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").innerHTML =
+        String(seconds).padStart(2, "0");
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+/* ===============================
+   STARS
+================================ */
+
+for(let i = 0; i < 80; i++) {
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.innerHTML =
+        Math.random() > 0.5 ? "✦" : "✧";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.fontSize =
+        (Math.random() * 10 + 5) + "px";
+
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    document.body.appendChild(star);
+}
+
+
+/* ===============================
+   FLOATING HEARTS
+================================ */
+
+const hearts = [
+    "❤️",
+    "💕",
+    "💗",
+    "💖",
+    "💘",
+    "💓"
+];
+
+for(let i = 0; i < 20; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating";
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.animationDuration =
+        (Math.random() * 8 + 7) + "s";
+
+    heart.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    document.body.appendChild(heart);
+}
+
+</script>
+
+</body>
+</html>
